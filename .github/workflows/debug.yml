@@ -27,7 +27,7 @@ jobs:
           chmod +x /usr/local/bin/cosign
 
           # Clone your fork at the correct branch with full history and tags
-          git clone --branch refactor/181-new-changelog-generator --single-branch https://github.com/doctorkotik187/bluefin.git bluefin
+          git clone https://github.com/doctorkotik187/bluefin.git
           cd bluefin
           git fetch --tags --force
 
@@ -35,6 +35,7 @@ jobs:
           git tag
 
           # Run the Babashka script
+          git switch refactor/181-new-changelog-generator && git pull
           bb .github/changelog.clj stable-20260212 stable-20260217 dk187-changelog.md
 
           # Move the output to workflow root for artifact upload
