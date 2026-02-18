@@ -39,10 +39,7 @@ jobs:
           git switch refactor/181-new-changelog-generator && git pull
           bb .github/changelog.clj stable-20260212 stable-20260217 dk187-changelog.md
 
-          # Move the output to workflow root for artifact upload
-          cp .github/dk187-changelog.md /dk187-changelog.md
-
       - uses: actions/upload-artifact@v4
         with:
           name: dk187-changelog
-          path: dk187-changelog.md
+          path: .github/dk187-changelog.md
