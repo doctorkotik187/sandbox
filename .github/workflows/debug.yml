@@ -1,0 +1,21 @@
+name: Debug
+
+on:
+  workflow_dispatch:
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    container:
+      image: babashka/babashka:latest-alpine
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate changelog
+        run: bb changelog.clj stable-20260212 stable-20260217 dk187-changelog.md
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dk187-changelog
+          path: dk187-changelog.md
