@@ -1,4 +1,4 @@
-name: Debug
+name: Generate Changelog
 
 on:
   push:
@@ -13,29 +13,31 @@ jobs:
       image: babashka/babashka:alpine
 
     steps:
-      - name: Install tools and run
+      - name: Install dependencies and run changelog
         run: |
           set -eux
 
+          # Install required tools
           apk add --no-cache git curl skopeo
 
+          # Install cosign
           COSIGN_VERSION="v2.2.4"
           curl -L -o /usr/local/bin/cosign \
             https://github.com/sigstore/cosign/releases/download/${COSIGN_VERSION}/cosign-linux-amd64
           chmod +x /usr/local/bin/cosign
 
-          # Clone the public repo you want to check
-          git clone --no-single-branch https://github.com/ublue-os/bluefin.git bluefin
+          # Clone your fork with full history and tags
+          git clone --no-single-branch https://github.com/doctorkotik187/bluefin.git bluefin
           cd bluefin
           git fetch --tags --force
 
-          # Optional: debug tags
+          # Optional: verify tags exist
           git tag
 
-          # Run your Babashka script from your sandbox
-          bb changelog.clj stable-20260212 stable-20260217 dk187-changelog.md
+          # Run the Babashka script
+          bb .gitlab/changelog.clj stable-20260212 stable-20260217 dk187-changelog.md
 
-          # Copy artifact for GitHub Actions
+          # Move the output to workflow root for artifact upload
           cp dk187-changelog.md /dk187-changelog.md
 
       - uses: actions/upload-artifact@v4
