@@ -33,7 +33,7 @@ jobs:
           git tag
 
           # Run your Babashka script from your sandbox
-          bb ../repo/changelog.clj stable-20260212 stable-20260217 dk187-changelog.md
+          bb changelog.clj stable-20260212 stable-20260217 dk187-changelog.md
 
           # Copy artifact for GitHub Actions
           cp dk187-changelog.md /dk187-changelog.md
