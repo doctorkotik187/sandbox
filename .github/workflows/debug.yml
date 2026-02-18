@@ -42,4 +42,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: dk187-changelog
-          path: .github/dk187-changelog.md
+          path: dk187-changelog.md
