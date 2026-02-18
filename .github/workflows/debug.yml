@@ -29,7 +29,8 @@ jobs:
           # Clone your fork at the correct branch with full history and tags
           git clone https://github.com/doctorkotik187/bluefin.git
           cd bluefin
-          git fetch --tags --force
+          git remote add upstream https://github.com/ublue-os/bluefin.git || true
+          git fetch upstream --tags
 
           # Optional: verify tags exist
           git tag
