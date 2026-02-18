@@ -35,7 +35,7 @@ jobs:
           git tag
 
           # Run the Babashka script
-          bb .gitlab/changelog.clj stable-20260212 stable-20260217 dk187-changelog.md
+          bb .github/changelog.clj stable-20260212 stable-20260217 dk187-changelog.md
 
           # Move the output to workflow root for artifact upload
           cp dk187-changelog.md /dk187-changelog.md
