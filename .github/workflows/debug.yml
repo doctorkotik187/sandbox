@@ -37,10 +37,11 @@ jobs:
 
           # Run the Babashka script
           git switch refactor/181-new-changelog-generator && git pull
-          bb .github/changelog.clj stable-20260212 stable-20260217 $GITHUB_WORKSPACE/changelog.md
+          bb .github/changelog.clj stable-20260212 stable-20260217 --json
+          bb .github/changelog.clj stable-20260212 stable-20260217
           ls -al $GITHUB_WORKSPACE
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: changelog
-          path: changelog.md
+      # - uses: actions/upload-artifact@v4
+      #   with:
+      #     name: changelog
+      #     path: changelog.md
