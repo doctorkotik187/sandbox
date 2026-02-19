@@ -18,7 +18,7 @@ jobs:
           set -eux
 
           # Install required tools
-          apk add --no-cache git curl skopeo
+          apk add --no-cache git curl skopeo glow
 
           # Install cosign
           COSIGN_VERSION="v2.2.4"
@@ -38,7 +38,7 @@ jobs:
           # Run the Babashka script
           git switch refactor/181-new-changelog-generator && git pull
           bb .github/changelog.clj stable-20260212 stable-20260217 --json
-          bb .github/changelog.clj stable-20260212 stable-20260217
+          bb .github/changelog.clj stable-20260212 stable-20260217 && glow changelog.md
           ls -al $GITHUB_WORKSPACE
 
       # - uses: actions/upload-artifact@v4
