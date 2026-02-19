@@ -39,7 +39,8 @@ jobs:
           git switch refactor/181-new-changelog-generator && git pull
           bb .github/changelog.clj stable-20260212 stable-20260217 --json && bat changelog.json
           wget https://github.com/charmbracelet/glow/releases/download/v2.1.1/glow_2.1.1_x86_64.apk && apk add --allow-untrusted glow_2.1.1_x86_64.apk
-          bb .github/changelog.clj stable-20260212 stable-20260217 && glow changelog.md
+          bb .github/changelog.clj stable-20260212 stable-20260217
+          cat changelog.md | glow -
           ls -al $GITHUB_WORKSPACE
 
       # - uses: actions/upload-artifact@v4
